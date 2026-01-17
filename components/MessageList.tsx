@@ -447,7 +447,7 @@ function WingedUsernameFrame({ username, badges, fontSize, getLightShadowColor, 
       {/* Aile gauche */}
       <img
         ref={leftWingRef}
-        src="/images/icones/ailes.svg"
+        src={`${getBasePath()}/images/icones/ailes.svg`}
         alt=""
         className={isFlapping ? 'animate-wing-flap-left' : ''}
         style={{
@@ -496,7 +496,7 @@ function WingedUsernameFrame({ username, badges, fontSize, getLightShadowColor, 
       {/* Aile droite (inversée) */}
       <img
         ref={rightWingRef}
-        src="/images/icones/ailes.svg"
+        src={`${getBasePath()}/images/icones/ailes.svg`}
         alt=""
         className={isFlapping ? 'animate-wing-flap-right' : ''}
         style={{
