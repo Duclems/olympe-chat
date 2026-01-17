@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,6 +18,45 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+.libre-baskerville {
+  font-family: "Libre Baskerville", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TASA Explorer";
+  src: url('/fonts/TASA-Explorer.woff2') format('woff2'),
+       url('/fonts/TASA-Explorer.woff') format('woff'),
+       url('/fonts/TASA-Explorer.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.tasa-explorer {
+  font-family: "TASA Explorer", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.unifrakturcook-bold {
+  font-family: "UnifrakturCook", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* S'assurer que les éléments créés par GSAP SplitText héritent de la police */
+.unifrakturcook-bold .split-char,
+.unifrakturcook-bold .split-word,
+.unifrakturcook-bold .split-line {
+  font-family: "UnifrakturCook", cursive !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
 }
 
 :root {

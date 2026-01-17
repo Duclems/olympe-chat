@@ -356,7 +356,9 @@ function MessageFrame({ children, boxShadow, fontSize, textColor, isChristmas = 
         fontSize: `${fontSize}px`, 
         color: textColor,
         fontWeight: 'bold',
-        fontFamily: "'Figtree Bold', sans-serif",
+        fontFamily: '"TASA Explorer", sans-serif',
+        fontOpticalSizing: 'auto',
+        fontStyle: 'normal',
       }}>
         {children}
       </span>
@@ -475,7 +477,7 @@ function WingedUsernameFrame({ username, badges, fontSize, getLightShadowColor, 
         <SplitText
           text={username}
           tag="span"
-          className=""
+          className="unifrakturcook-bold"
           delay={30}
           duration={0.8}
           ease="power1.out"
@@ -486,8 +488,9 @@ function WingedUsernameFrame({ username, badges, fontSize, getLightShadowColor, 
           style={{
             fontSize: `${fontSize}px`,
             color: getLightTextColor(badges),
-            fontWeight: 'bold',
-            fontFamily: "'Oliver Regular', sans-serif",
+            fontWeight: 700,
+            fontFamily: '"UnifrakturCook", cursive',
+            fontStyle: 'normal',
             paddingTop: '0.3rem',
             display: 'inline-block',
           }}
