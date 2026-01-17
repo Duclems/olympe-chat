@@ -6,6 +6,22 @@ import SplitText from './SplitText'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 
+// Fonction utilitaire pour obtenir le basePath
+const getBasePath = (): string => {
+  // Utiliser la variable d'environnement si disponible
+  if (process.env.NEXT_PUBLIC_BASE_PATH) {
+    return process.env.NEXT_PUBLIC_BASE_PATH
+  }
+  // Sinon, détecter depuis l'URL actuelle
+  if (typeof window !== 'undefined') {
+    const path = window.location.pathname
+    if (path.startsWith('/olympe-chat')) {
+      return '/olympe-chat'
+    }
+  }
+  return ''
+}
+
 interface MessageListProps {
   messages: ChatMessage[]
   messagesEndRef: RefObject<HTMLDivElement>
@@ -67,7 +83,7 @@ function MessageFrame({ children, boxShadow, fontSize, textColor, isChristmas = 
     const textColorForSVG = '#f5e7ff' // Couleur du texte pour les citrouilles des coins
     
     // Charger la citrouille pour les coins du cadre (toujours chargée)
-    fetch('/images/icones/pumkin-svgrepo-com.svg')
+    fetch(`${getBasePath()}/images/icones/pumkin-svgrepo-com.svg`)
       .then(response => response.text())
       .then(svgContent => {
         // Remplacer la couleur fill avec la couleur du texte
@@ -82,7 +98,7 @@ function MessageFrame({ children, boxShadow, fontSize, textColor, isChristmas = 
     
     // Charger le diamant pour les VIP (prioritaire sur les thèmes)
     if (isVIP) {
-      fetch('/images/icones/diamond-svgrepo-com.svg')
+      fetch(`${getBasePath()}/images/icones/diamond-svgrepo-com.svg`)
         .then(response => response.text())
         .then(svgContent => {
           // Remplacer la couleur stroke (le diamant utilise stroke, pas fill)
@@ -101,7 +117,7 @@ function MessageFrame({ children, boxShadow, fontSize, textColor, isChristmas = 
 
     // Charger l'épée pour les modérateurs (prioritaire sur les thèmes)
     if (isModerator) {
-      fetch('/images/icones/sword-fill-svgrepo-com.svg')
+      fetch(`${getBasePath()}/images/icones/sword-fill-svgrepo-com.svg`)
         .then(response => response.text())
         .then(svgContent => {
           // Remplacer la couleur fill (l'épée utilise fill)
@@ -119,7 +135,7 @@ function MessageFrame({ children, boxShadow, fontSize, textColor, isChristmas = 
     }
     
     if (isChristmas && !isVIP && !isModerator) {
-      fetch('/images/icones/snowflake-bold-svgrepo-com.svg')
+      fetch(`${getBasePath()}/images/icones/snowflake-bold-svgrepo-com.svg`)
         .then(response => response.text())
         .then(svgContent => {
           // Remplacer la couleur fill et la viewBox
@@ -137,7 +153,7 @@ function MessageFrame({ children, boxShadow, fontSize, textColor, isChristmas = 
 
     // Charger la citrouille par défaut (si pas VIP, modérateur, Noël, Halloween ou Pâques)
     if ((isHalloween || (!isVIP && !isModerator && !isChristmas && !isEaster)) && !isVIP && !isModerator) {
-      fetch('/images/icones/pumkin-svgrepo-com.svg')
+      fetch(`${getBasePath()}/images/icones/pumkin-svgrepo-com.svg`)
         .then(response => response.text())
         .then(svgContent => {
           // Remplacer la couleur fill et la viewBox
@@ -154,7 +170,7 @@ function MessageFrame({ children, boxShadow, fontSize, textColor, isChristmas = 
     }
 
     if (isEaster && !isVIP && !isModerator) {
-      fetch('/images/icones/easter-egg-3-svgrepo-com.svg')
+      fetch(`${getBasePath()}/images/icones/easter-egg-3-svgrepo-com.svg`)
         .then(response => response.text())
         .then(svgContent => {
           // Remplacer la couleur fill et la viewBox
@@ -602,7 +618,7 @@ export default function MessageList({
 
   // Charger le fichier CSV des custom names
   useEffect(() => {
-    fetch('/data/custom-names.csv')
+    fetch(`${getBasePath()}/data/custom-names.csv`)
       .then(response => response.text())
       .then(text => {
         const lines = text.split('\n').filter(line => line.trim())
@@ -641,7 +657,7 @@ export default function MessageList({
   const [currentThemeName, setCurrentThemeName] = useState<string>('default')
   
   useEffect(() => {
-    fetch('/data/themes.json')
+    fetch(`${getBasePath()}/data/themes.json`)
       .then(response => response.json())
       .then(data => {
         const themesList = data.themes || []

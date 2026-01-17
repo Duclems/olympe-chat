@@ -5,6 +5,22 @@ import { useSearchParams } from 'next/navigation'
 import MessageList from './MessageList'
 import { TWITCH_CHANNEL, getThemeColor, THEME_COLORS } from '@/config'
 
+// Fonction utilitaire pour obtenir le basePath
+const getBasePath = (): string => {
+  // Utiliser la variable d'environnement si disponible
+  if (process.env.NEXT_PUBLIC_BASE_PATH) {
+    return process.env.NEXT_PUBLIC_BASE_PATH
+  }
+  // Sinon, détecter depuis l'URL actuelle
+  if (typeof window !== 'undefined') {
+    const path = window.location.pathname
+    if (path.startsWith('/olympe-chat')) {
+      return '/olympe-chat'
+    }
+  }
+  return ''
+}
+
 export interface ChatMessage {
   id: string
   username: string
@@ -59,7 +75,7 @@ export default function ChatContainer() {
   
   // Charger les thèmes depuis le fichier JSON
   useEffect(() => {
-    fetch('/data/themes.json')
+    fetch(`${getBasePath()}/data/themes.json`)
       .then(response => response.json())
       .then(data => {
         setThemes(data.themes || [])
