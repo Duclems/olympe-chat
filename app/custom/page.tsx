@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { getBasePath } from '@/lib/basePath'
 
 interface CustomName {
   pseudonyme: string
@@ -14,10 +15,22 @@ export default function CustomNamesPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+  const [isProduction, setIsProduction] = useState(false)
+
+  // Détecter si on est en production (sur GitHub Pages)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Si on est sur GitHub Pages, on a un basePath
+      const basePath = getBasePath()
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      // On est en production si on a un basePath OU si on n'est pas sur localhost
+      setIsProduction(basePath !== '' || (!isLocalhost && process.env.NODE_ENV === 'production'))
+    }
+  }, [])
 
   // Charger les custom names depuis le CSV
   useEffect(() => {
-    fetch('/data/custom-names.csv')
+    fetch(`${getBasePath()}/data/custom-names.csv`)
       .then(response => response.text())
       .then(text => {
         const lines = text.split('\n').filter(line => line.trim())
@@ -65,7 +78,7 @@ export default function CustomNamesPage() {
       // Filtrer les lignes vides
       const validNames = customNames.filter(n => n.pseudonyme.trim())
 
-      const response = await fetch('/api/save-custom-names', {
+      const response = await fetch(`${getBasePath()}/api/save-custom-names`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,6 +100,32 @@ export default function CustomNamesPage() {
     } finally {
       setSaving(false)
     }
+  }
+
+  // Afficher un message si on est en production
+  if (isProduction) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-8" style={{ backgroundColor: '#ffffff' }}>
+        <div className="max-w-2xl text-center">
+          <h1 className="text-3xl font-bold mb-4" style={{ color: '#1e0332' }}>
+            Page non disponible
+          </h1>
+          <p className="text-xl mb-6" style={{ color: '#1e0332' }}>
+            Cette page est uniquement disponible en développement local.
+          </p>
+          <p className="mb-6" style={{ color: '#666' }}>
+            Pour gérer les pseudos personnalisés, veuillez exécuter l'application en local avec <code className="bg-gray-100 px-2 py-1 rounded">npm run dev</code>
+          </p>
+          <button
+            onClick={() => router.push('/')}
+            className="px-6 py-3 rounded-lg font-semibold"
+            style={{ backgroundColor: '#1e0332', color: '#f5e7ff' }}
+          >
+            Retour au Chat
+          </button>
+        </div>
+      </div>
+    )
   }
 
   if (loading) {
