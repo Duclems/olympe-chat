@@ -24,9 +24,12 @@
   --background-end-rgb: 14, 14, 16;
 }
 
+html, body {
+  background-color: transparent;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background-color: #ffffff;
   margin: 0px auto;
   overflow: hidden;
 }
