@@ -105,7 +105,7 @@ export default function CustomNamesPage() {
   // Afficher un message si on est en production
   if (isProduction) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-8" style={{ backgroundColor: '#ffffff' }}>
+      <div className="min-h-screen flex items-center justify-center p-8" style={{ backgroundColor: 'transparent' }}>
         <div className="max-w-2xl text-center">
           <h1 className="text-3xl font-bold mb-4" style={{ color: '#1e0332' }}>
             Page non disponible
@@ -130,14 +130,14 @@ export default function CustomNamesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#ffffff' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'transparent' }}>
         <div className="text-xl">Chargement...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen p-8" style={{ backgroundColor: '#ffffff' }}>
+    <div className="min-h-screen p-8" style={{ backgroundColor: 'transparent' }}>
       <div className="max-w-4xl mx-auto">
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-3xl font-bold" style={{ color: '#1e0332' }}>
