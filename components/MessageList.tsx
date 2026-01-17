@@ -5,22 +5,7 @@ import { RefObject, useRef, useState, useEffect, useCallback } from 'react'
 import SplitText from './SplitText'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
-
-// Fonction utilitaire pour obtenir le basePath
-const getBasePath = (): string => {
-  // Utiliser la variable d'environnement si disponible
-  if (process.env.NEXT_PUBLIC_BASE_PATH) {
-    return process.env.NEXT_PUBLIC_BASE_PATH
-  }
-  // Sinon, détecter depuis l'URL actuelle
-  if (typeof window !== 'undefined') {
-    const path = window.location.pathname
-    if (path.startsWith('/olympe-chat')) {
-      return '/olympe-chat'
-    }
-  }
-  return ''
-}
+import { getBasePath } from '@/lib/basePath'
 
 interface MessageListProps {
   messages: ChatMessage[]
