@@ -159,10 +159,10 @@ export default function ChatContainer() {
     })
 
     client.on('message', (channel: string, tags: any, message: string, self: boolean) => {
-      // Ne pas afficher les messages de olympebat
+      // Ne pas afficher les messages de olympebatt
       const username = (tags['display-name'] || tags.username || '').toLowerCase()
-      if (username === 'olympebat') {
-        console.log('💬 Message de olympebat:', message)
+      if (username === 'olympebatt') {
+        console.log('💬 Message de olympebatt:', message)
         return
       }
       

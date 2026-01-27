@@ -29,8 +29,8 @@ export default function IntroPage() {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
   const [currentCitationIndex, setCurrentCitationIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
-  const fontSize = 48 // Taille assez grosse, similaire aux pseudos
-  const citationFontSize = 12 // Très petit
+  const fontSize = 96 // Taille assez grosse, similaire aux pseudos
+  const citationFontSize = 24 // Très petit
 
   const getTextColor = () => {
     return '#f5e7ff'

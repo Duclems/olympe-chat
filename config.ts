@@ -1,5 +1,5 @@
 // Configuration de la chaîne Twitch
-export const TWITCH_CHANNEL = 'olympebat' //remplacer par le nom de la chaîne souhaitée
+export const TWITCH_CHANNEL = 'olympebatt' //remplacer par le nom de la chaîne souhaitée
 
 // Configuration des couleurs selon les périodes (par défaut, sera remplacé par le fichier JSON)
 export const THEME_COLORS = {
